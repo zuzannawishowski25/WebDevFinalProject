@@ -6,3 +6,7 @@
 # Delete: Reset button sets counter value to 0
 
 # Firestore rules are NOT currently open, to keep data from being public
+
+# Demo Video
+
+[Click to watch the demo](./demo.mp4)
