@@ -2,6 +2,8 @@
 <html>
 <head>
   <title>Click Counter App</title>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
   <h1>Click Counter</h1>
@@ -9,7 +11,47 @@
   <button onclick="incrementCounter()">Increment</button>
   <button onclick="resetCounter()">Reset</button>
 
-  <!-- Firebase + your logic -->
-  <script type="module" src="script.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAFyiEa5B6vyLZ3wkiFoVRJVqAFA857AsE",
+      authDomain: "webdevfinalproject-c3c71.firebaseapp.com",
+      projectId: "webdevfinalproject-c3c71",
+      storageBucket: "webdevfinalproject-c3c71.firebasestorage.app",
+      messagingSenderId: "1039002524146",
+      appId: "1:1039002524146:web:ff858b3afbea137a71b36b",
+      measurementId: "G-46LJ5QTB8P"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const counterRef = db.collection("counters").doc("clicks");
+
+    function loadCounter() {
+      counterRef.get().then(doc => {
+        if (!doc.exists) {
+          counterRef.set({ value: 0 });
+          document.getElementById("counter").innerText = 0;
+        } else {
+          document.getElementById("counter").innerText = doc.data().value;
+        }
+      });
+    }
+
+    function incrementCounter() {
+      counterRef.get().then(doc => {
+        const current = doc.data().value;
+        counterRef.set({ value: current + 1 });
+        document.getElementById("counter").innerText = current + 1;
+      });
+    }
+
+    function resetCounter() {
+      counterRef.set({ value: 0 });
+      document.getElementById("counter").innerText = 0;
+    }
+
+    window.onload = loadCounter;
+  </script>
 </body>
 </html>

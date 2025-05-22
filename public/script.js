@@ -37,4 +37,13 @@ async function resetCounter() {
   document.getElementById("counter").innerText = 0;
 }
 
+async function incrementCounter() {
+    const snap = await getDoc(counterRef);
+    const current = snap.data().value;
+    console.log("Current value:", current);
+    await setDoc(counterRef, { value: current + 1 });
+    console.log("New value written:", current + 1);
+    document.getElementById("counter").innerText = current + 1;
+  }
+  
 window.onload = loadCounter;
