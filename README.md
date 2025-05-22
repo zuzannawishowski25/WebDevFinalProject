@@ -5,3 +5,4 @@
 # Update: When user clicks a button, increment the counter in Firestore
 # Delete: Reset button sets counter value to 0
 
+# Firestore rules are currently open for demonstration purposes.
